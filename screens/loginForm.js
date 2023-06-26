@@ -7,8 +7,8 @@ const Login = ()=>{
 
     return(
         <View style={styles.container}> 
-            <InputGroup inputValue={userName} updateValue={setUserName} title="userName"/>
-            <InputGroup inputValue={password}  updateValue={setpassword} title="password"/>
+            <InputGroup  inputLang={"en"} inputValue={userName} updateValue={setUserName} title="userName"/>
+            <InputGroup  inputLang={"en"} inputValue={password}  updateValue={setpassword} title="password"/>
         </View>
     )
 }

@@ -3,6 +3,8 @@ import { Alert,View } from "react-native"
 import {useState} from "react"
 import { Button ,Text,Image, StyleSheet} from "react-native"
 import { mapUri } from "../util/googleMapsImageUri"
+
+import CustomButton from "./customButton"
 const LocationPicker = ()=>{
 
 const [locationPermissionInformation , requestPermission] = useForegroundPermissions()
@@ -54,11 +56,13 @@ async function getloction(){
 
 
 return(
-    <View>
+    <View >
 
-        <Button title="demo" onPress={getloction}/>
+        <CustomButton  onPress={getloction}>
+            اختيار الموقع الحالي
+        </CustomButton>
         <View>
-            {pickedLocation ? <Image style={styles.image} source={{uri: mapUri(pickedLocation.lat,pickedLocation.lng)}}/>: <Text>no location piccked</Text> }
+            {pickedLocation ? <Image style={styles.image} source={{uri: mapUri(pickedLocation.lat,pickedLocation.lng)}}/>: <View style={styles.text}><Text >no image piccked</Text></View> }
         </View>
         
     </View>
@@ -68,6 +72,15 @@ const styles = StyleSheet.create({
     image:{
         width:"100%",
         height:300,
+    },
+    text:{
+        marginVertical:10,
+        borderRadius:22,
+        width:"100%",
+        height:300,
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:"green"
     }
 })
 

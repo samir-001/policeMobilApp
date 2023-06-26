@@ -10,12 +10,10 @@ const ManageCase = ()=>{
 
     const Tab = createMaterialTopTabNavigator();
     return( 
-      <>
         <Tab.Navigator initialRouteName={NewCase}>
-        <Tab.Screen name="تقديم شكوي" component={NewCase} />
-        <Tab.Screen name="متابعة الشكاوي" component={OldCases} />
+          <Tab.Screen name="متابعة الشكاوي" component={OldCases} />
+          <Tab.Screen name="تقديم شكوي" component={NewCase} />
       </Tab.Navigator>
-      </>
   
         
     )

@@ -33,11 +33,16 @@ const Home = ()=>{
                          <FlatList  horizontal nestedScrollEnabled={true} data={services} renderItem={(item)=> <ServiceLabel data ={item.item}/>} keyExtractor={(item)=>item.id} />
                     </Section>
                     <Section title={"مراكز الهيئة"}>
-                            <Map></Map>
+                            <Map coord={{
+                        latitude: 21.418276997926352,
+                        longitude: 39.81672282898905,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                  }}></Map>
                     </Section>
                     <Section title={" اترك رسالة"}>
                         <Text style ={{marginVertical:15,marginRight:10}}>قدم اقتراح او شكوي تخص الموقع</Text>
-                        <TextInput style= {styles.message} multiline={true}/>
+                        <TextInput style= {styles.message} multiline={true} numberOfLines={3}/>
                     </Section>
                     <Footer/>
                     
@@ -55,7 +60,6 @@ const styles = StyleSheet.create({
     message:{borderColor:"black",
     borderRadius:22,
     borderWidth:2,
-    minHeight:60,
     padding:10,
 }
 })

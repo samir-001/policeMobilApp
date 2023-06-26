@@ -19,7 +19,7 @@ export default function App() {
   return (
 
     <Provider store={store}> 
-    <StatusBar style='light'/>
+  <StatusBar style='light'/>
           <LinearGradient style={{flex:1}}  colors={[colors.extraLight,colors.light]}>
           <NavigationContainer>
             <stack.Navigator initialRouteName='home' 

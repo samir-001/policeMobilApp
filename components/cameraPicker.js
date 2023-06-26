@@ -2,6 +2,7 @@
 import { useState } from "react"
 import { Alert, Button, View ,Text,Image,StyleSheet} from "react-native"
 import { PermissionStatus, useCameraPermissions, launchCameraAsync } from "expo-image-picker"
+import CustomButton from "./customButton"
 const CameraPicker = ()=>{
     const [capturedImage, setImageData] = useState();
     const [cameraPermissionInformation ,requestPermission] = useCameraPermissions();
@@ -37,7 +38,8 @@ const CameraPicker = ()=>{
             const image = await launchCameraAsync({
                 allowsEditing:true,
                 aspect:[16,9],
-                quality:.5
+                quality:.5,
+                
             })
             console.log(image.assets[0].uri)
             setImageData(image.assets[0].uri)
@@ -45,20 +47,35 @@ const CameraPicker = ()=>{
 
     }
     return(
-        <View>
-            <Button title={"camera"}onPress={pickImage}/>
+        <View style={styles.container}>
+
+                <CustomButton  onPress={pickImage}> 
+                    التقاط صوره
+                </CustomButton>
             <View>
                 {console.log(capturedImage)}
-            {capturedImage ? <Image style={styles.image} source={{uri: capturedImage}}/>: <Text>no image piccked</Text> }
+            {capturedImage ? <Image style={styles.image} source={{uri: capturedImage}}/>:<View style={styles.text}><Text >no image piccked</Text></View>  }
         </View>
         </View>
     )
 
 }
 const styles = StyleSheet.create({
+    container:{
+        width:"100%"
+    },  
     image:{
         width:"100%",
         height:300,
+    },
+    text:{
+        marginVertical:10,
+        borderRadius:22,
+        width:"100%",
+        height:300,
+        justifyContent:"center",
+        alignItems:"center",
+        backgroundColor:"green"
     }
 })
 

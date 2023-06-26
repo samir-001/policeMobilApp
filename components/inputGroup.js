@@ -2,7 +2,7 @@ import { StyleSheet,TextInput,View,Text, Animated} from "react-native"
 
 import { fontSizes,colors } from "../globalSetting/styles"
 
-const InputGroup = ({title,inputValue,updateValue})=>{
+const InputGroup = ({title,inputValue,updateValue,inputLang})=>{
 
     const place= new Animated.Value(-30);
     function movePlaceholder(){
@@ -31,15 +31,15 @@ const InputGroup = ({title,inputValue,updateValue})=>{
             <Animated.View style={{bottom:place, transform:[
             {
                 scale:place.interpolate({
-                    inputRange:[-30,0],
+                    inputRange:[inputLang == "en"?-30:0,0],
                     outputRange:[1,.8]
                 })
                 
             },
             {
                 translateX:place.interpolate({
-                    inputRange:[-30,0],
-                    outputRange:[0,-40]
+                    inputRange:[inputLang == "en"?-30:0,0],
+                    outputRange:[0,inputLang == "en"?-40:0]
                 })
             }
 
@@ -57,8 +57,7 @@ const InputGroup = ({title,inputValue,updateValue})=>{
 
 const styles = StyleSheet.create({
     container:{
-        width:"80%",
-        
+        width:"100%"
     },
     input:{
         padding:4,
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
         marginBottom:10
     },
     text:{
-        paddingLeft:8,
+        paddingHorizontal:8,
         position:"relative",
         fontSize:17,
         color:colors.extraDark,
