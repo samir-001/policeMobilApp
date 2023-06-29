@@ -2,11 +2,11 @@ import { StyleSheet,TextInput,View,Text, Animated} from "react-native"
 
 import { fontSizes,colors } from "../globalSetting/styles"
 
-const InputGroup = ({title,inputValue,updateValue,inputLang})=>{
+const InputGroup = ({textarea,title,inputValue,updateValue,inputLang})=>{
 
     const place= new Animated.Value(-30);
     function movePlaceholder(){
-        if(!inputValue){
+        if(!inputValue[title]){
             Animated.timing(place,{
                 toValue:0,
                 duration:100,
@@ -16,8 +16,8 @@ const InputGroup = ({title,inputValue,updateValue,inputLang})=>{
         }
     }
     function resetPlaceHolder(){
-        if(inputValue === undefined|| inputValue === null || inputValue == '' ){
-
+        if(inputValue[title] === undefined|| inputValue[title] === null || inputValue[title] == '' ){
+            console.log(inputValue)
             Animated.timing(place,{
                 toValue:-30,
                 duration:300,
@@ -48,7 +48,12 @@ const InputGroup = ({title,inputValue,updateValue,inputLang})=>{
                  <Text style={styles.text}>{title}</Text>
             </Animated.View>
             <TextInput style={styles.input} 
-            onChangeText={(text)=>{ updateValue(text)} }
+            multiline={textarea ? true:false }
+            numberOfLines={textarea ? 4: 1}
+            onChangeText={(text)=>{
+                 updateValue(text,title)
+                }
+                 }
             onFocus={()=>{movePlaceholder()}}
             onBlur={()=>{resetPlaceHolder() }}/>
         </View>

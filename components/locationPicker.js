@@ -1,14 +1,15 @@
 import {getCurrentPositionAsync ,PermissionStatus, useForegroundPermissions} from "expo-location"
 import { Alert,View } from "react-native"
-import {useState} from "react"
-import { Button ,Text,Image, StyleSheet} from "react-native"
+import {Text,Image, StyleSheet} from "react-native"
 import { mapUri } from "../util/googleMapsImageUri"
 
 import CustomButton from "./customButton"
-const LocationPicker = ()=>{
+import { useState } from "react"
+const LocationPicker = ({formData,setLocation})=>{
+    const [Picked,isPicked] = useState(false)
+
 
 const [locationPermissionInformation , requestPermission] = useForegroundPermissions()
-const [pickedLocation, setPickedLocation] = useState();
 
 async function newLocationRequest(){
     const rquest = await requestPermission();
@@ -48,10 +49,12 @@ async function getloction(){
     
     const picker = await getCurrentPositionAsync()
         
-    setPickedLocation({
+    setLocation({
         lat:picker.coords.latitude,
-        lng:picker.coords.longitude
-    }) 
+        lng:picker.coords.longitude,
+        
+    },"location") 
+    isPicked(true)
 }
 
 
@@ -62,7 +65,7 @@ return(
             اختيار الموقع الحالي
         </CustomButton>
         <View>
-            {pickedLocation ? <Image style={styles.image} source={{uri: mapUri(pickedLocation.lat,pickedLocation.lng)}}/>: <View style={styles.text}><Text >no image piccked</Text></View> }
+            {Picked ? <Image style={styles.image} source={{uri: mapUri(formData.location.lat,formData.location.lng)}}/>: <View style={styles.text}><Text >no image piccked</Text></View> }
         </View>
         
     </View>

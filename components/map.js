@@ -3,11 +3,14 @@ import React, { useRef, useState } from 'react';
 import MapView from 'react-native-maps';
 import {Marker,Callout,Polyline} from 'react-native-maps';
 import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
+
 import { fontSizes,colors } from "../globalSetting/styles"
 import DropDown from "./dropDown";
 
 
-const Map = ({title,children,initCoord})=>{
+const Map = ({title,children})=>{
+    
 
     const [userLocation,setUserLocation] = useState({
         latitude: 21.418276997926352,
@@ -48,13 +51,16 @@ const Map = ({title,children,initCoord})=>{
     
     return(
         <View style={styles.container}>
-           
-                <DropDown value={userLocation} data={markers}/>
-                
+                    <DropDown title="مواقع مراكز الشرطه" data={markers} val={userLocation} setValue={setUserLocation}></DropDown>
                 <MapView  style={styles.map} 
                     ref = {(mapView) => { _mapView = mapView; }}
                     
-                    initialRegion={initCoord}
+                    initialRegion={{
+                        latitude: 21.418276997926352,
+                        longitude: 39.81672282898905,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                  }}
                 provider="google"
             
                 >
@@ -80,7 +86,8 @@ const styles = StyleSheet.create({
     },
     map:{
         width:"100%",
-        height:300 
+        height:300 ,
+        marginTop:10
     },
     dropdown:{
       height: 50,

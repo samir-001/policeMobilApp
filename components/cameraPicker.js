@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Alert, Button, View ,Text,Image,StyleSheet} from "react-native"
 import { PermissionStatus, useCameraPermissions, launchCameraAsync } from "expo-image-picker"
 import CustomButton from "./customButton"
-const CameraPicker = ()=>{
+const CameraPicker = ({})=>{
     const [capturedImage, setImageData] = useState();
     const [cameraPermissionInformation ,requestPermission] = useCameraPermissions();
     
@@ -41,8 +41,7 @@ const CameraPicker = ()=>{
                 quality:.5,
                 
             })
-            console.log(image.assets[0].uri)
-            setImageData(image.assets[0].uri)
+            setImageData(image.assets[0].uri,'image')
         
 
     }
@@ -53,7 +52,7 @@ const CameraPicker = ()=>{
                     التقاط صوره
                 </CustomButton>
             <View>
-                {console.log(capturedImage)}
+              
             {capturedImage ? <Image style={styles.image} source={{uri: capturedImage}}/>:<View style={styles.text}><Text >no image piccked</Text></View>  }
         </View>
         </View>
